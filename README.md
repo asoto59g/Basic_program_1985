@@ -3,10 +3,13 @@
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.39+-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/)
 [![BASICA 1990](https://img.shields.io/badge/BASICA-1990-1B4D3E.svg)](original/NIVEL2.txt)
 [![Último commit](https://img.shields.io/github/last-commit/asoto59g/Basic_program_1985)](https://github.com/asoto59g/Basic_program_1985)
 
 Repositorio: [asoto59g/Basic_program_1985](https://github.com/asoto59g/Basic_program_1985)
+
+**App en línea:** [https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/](https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/)
 
 Este proyecto documenta, con un caso real, cómo **recuperar el código fuente** de un programa IBM BASICA / GW-BASIC de finales de los 80 y **volver a usarlo** en una máquina actual. El ejemplar es `NIVEL2.BAS` (1990): compensación de **corte y relleno** en una nivelación topográfica por cuadrícula.
 
@@ -103,6 +106,25 @@ python -m streamlit run app.py
 ```
 
 El navegador abre [http://localhost:8501](http://localhost:8501).
+
+### Desplegar (no usar Vercel)
+
+Vercel espera un `app.py` tipo Flask/FastAPI con `app`, `application` o `handler`. Esta aplicación es **Streamlit**: un servidor con WebSockets que tiene que seguir vivo. En Vercel no puede correr; el error `does not export a top-level "app"` es exactamente eso.
+
+**Opción recomendada — Streamlit Community Cloud (gratis):**
+
+La app publicada está en:
+
+[https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/](https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/)
+
+Para volver a desplegar: [share.streamlit.io](https://share.streamlit.io) → repositorio `asoto59g/Basic_program_1985`, rama `main`, archivo `app.py`.
+
+**Opción Docker** (Render, Railway, Fly.io, un VPS):
+
+```bash
+docker build -t nivel2 .
+docker run -p 8501:8501 nivel2
+```
 
 Uso:
 

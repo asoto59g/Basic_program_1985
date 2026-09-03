@@ -1,0 +1,9 @@
+.git
+.venv
+__pycache__
+*.pyc
+TOPO91
+*.xls
+*.XLS
+BASICA.EXE
+BASIC.COM
