@@ -7,7 +7,7 @@
 [![BASICA 1990](https://img.shields.io/badge/BASICA-1990-1B4D3E.svg)](original/NIVEL2.txt)
 [![Último commit](https://img.shields.io/github/last-commit/asoto59g/Basic_program_1985)](https://github.com/asoto59g/Basic_program_1985)
 
-Repositorio: [asoto59g/Basic_program_1985](https://github.com/asoto59g/Basic_program_1985)
+
 
 **App en línea:** [https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/](https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/)
 
