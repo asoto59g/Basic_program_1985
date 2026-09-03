@@ -9,7 +9,7 @@
 
 
 
-#**App en línea:** [https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/](https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/)
+**App en línea:** [Nivelacion de lotes agricolas en cuadricula](https://basicprogram1985-qdzcuwr6wwgke5w6rnqopx.streamlit.app/)
 
 Este proyecto documenta, con un caso real, cómo **recuperar el código fuente** de un programa IBM BASICA / GW-BASIC de finales de los 80 y **volver a usarlo** en una máquina actual. El ejemplar es `NIVEL2.BAS` (1990): compensación de **corte y relleno** en una nivelación topográfica por cuadrícula.
 
