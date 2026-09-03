@@ -10,6 +10,7 @@ import pandas as pd
 import streamlit as st
 
 from nivelacion import (
+    VACIO_DISENO,
     Lote,
     OpcionesDiseno,
     calcular,
@@ -124,8 +125,20 @@ def _cargar(path: Path) -> Lote:
     return cargar_lote_basica(path)
 
 
+def _matriz_en_lote(mat: np.ndarray, sta: np.ndarray) -> pd.DataFrame:
+    """NaN en estaciones con terreno 0 (fuera del lote)."""
+    df = matriz_a_dataframe(mat)
+    for i in range(sta.shape[0]):
+        for j in range(sta.shape[1]):
+            if sta[i, j] < VACIO_DISENO:
+                df.iloc[i, j] = np.nan
+    return df
+
+
 def _estilo_cr(df: pd.DataFrame):
     def color(val):
+        if pd.isna(val):
+            return "background-color: transparent; color: transparent"
         try:
             v = float(val)
         except (TypeError, ValueError):
@@ -136,32 +149,45 @@ def _estilo_cr(df: pd.DataFrame):
             return "background-color: rgba(46, 140, 110, 0.35); color: #d8ffe8"
         return "background-color: rgba(160, 70, 55, 0.40); color: #ffe0d4"
 
-    return df.style.format("{:+.2f}").map(color)
+    return df.style.format(lambda v: "" if pd.isna(v) else f"{v:+.2f}").map(color)
 
 
-def _chart_cr(cr: np.ndarray):
+def _chart_cr(cr: np.ndarray, sta: np.ndarray):
     import altair as alt
 
     filas = []
     a, b = cr.shape
     for i in range(a):
         for j in range(b):
+            dentro = float(sta[i, j]) >= VACIO_DISENO
             filas.append(
                 {
                     "x": j + 1,
                     "y": i + 1,
                     "Hilera": f"H{i + 1}",
                     "Columna": f"C{j + 1}",
-                    "CR": round(float(cr[i, j]), 3),
+                    "CR": round(float(cr[i, j]), 3) if dentro else None,
+                    "dentro": dentro,
                 }
             )
     df = pd.DataFrame(filas)
-    return (
+    orden_h = [f"H{k}" for k in range(1, a + 1)]
+    orden_c = [f"C{k}" for k in range(1, b + 1)]
+    encode_xy = dict(
+        x=alt.X("Columna:O", title="Oeste (C1)  →  Este", sort=orden_c),
+        y=alt.Y("Hilera:O", title="Norte (H1)  →  Sur", sort=orden_h),
+    )
+    fondo = (
         alt.Chart(df)
+        .mark_rect(stroke="#141c18", strokeWidth=1, fill="#1e2a24")
+        .encode(**encode_xy)
+    )
+    datos = (
+        alt.Chart(df)
+        .transform_filter("datum.dentro")
         .mark_rect(stroke="#141c18", strokeWidth=1)
         .encode(
-            x=alt.X("x:O", title="Oeste  →  Este"),
-            y=alt.Y("y:O", title="Norte  ↑", sort="descending"),
+            **encode_xy,
             color=alt.Color(
                 "CR:Q",
                 title="Corte (−) / Relleno (+)",
@@ -169,8 +195,8 @@ def _chart_cr(cr: np.ndarray):
             ),
             tooltip=["Hilera", "Columna", "CR"],
         )
-        .properties(height=max(280, 28 * a))
     )
+    return alt.layer(fondo, datos).properties(height=max(280, 28 * a))
 
 
 def main() -> None:
@@ -365,13 +391,18 @@ la relación corte/relleno pedida, igual que `CORTERELLENO$` en el BASICA.
             c_izq, c_der = st.columns((1.1, 1))
             with c_izq:
                 st.markdown("**Cortes (−) y rellenos (+)**")
-                st.dataframe(_estilo_cr(matriz_a_dataframe(res.cr)), width="stretch")
+                st.dataframe(
+                    _estilo_cr(_matriz_en_lote(res.cr, lote.sta)),
+                    width="stretch",
+                )
             with c_der:
-                st.altair_chart(_chart_cr(res.cr), width="stretch")
+                st.altair_chart(_chart_cr(res.cr, lote.sta), width="stretch")
 
             st.markdown("**Elevaciones de diseño**")
             st.dataframe(
-                matriz_a_dataframe(res.sta1).style.format("{:.2f}"),
+                _matriz_en_lote(res.sta1, lote.sta).style.format(
+                    lambda v: "" if pd.isna(v) else f"{v:.2f}"
+                ),
                 width="stretch",
             )
 
