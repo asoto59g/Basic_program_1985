@@ -1,0 +1,46 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Intérpretes Microsoft de época (copyright; no redistribuir)
+BASIC.COM
+BASICA.EXE
+BASICA.PIF
+BASICA.VOM
+
+# Datos de otro programa / no NIVEL2
+TOPO91/
+
+# Ofimática y residuales del disco original
+*.xls
+*.XLS
+*.xlc
+*.XLC
+*.dxf
+*.DXF
+*.pif
+*.PIF
+PRUEBA.json
+SS.PA
+SS.PE
+SS.PG
+P-SS.DXF
+QUIT
+256
+
+# Listados tokenizados: la copia canónica está en original/
+/NIVEL2.BAS
+/NIVEL.BAS
+/NIVEL2.txt
+/NIVEL.txt
+/detokenize_gwbasic.py
+Thumbs.db
+desktop.ini
