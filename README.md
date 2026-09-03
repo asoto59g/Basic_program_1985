@@ -1,6 +1,12 @@
 # Rescate de NIVEL2.BAS (BASICA, 1990) → Python
 
-Repositorio de referencia: [asoto59g/Basic_program_1985](https://github.com/asoto59g/Basic_program_1985)
+[![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.39+-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io)
+[![BASICA 1990](https://img.shields.io/badge/BASICA-1990-1B4D3E.svg)](original/NIVEL2.txt)
+[![Último commit](https://img.shields.io/github/last-commit/asoto59g/Basic_program_1985)](https://github.com/asoto59g/Basic_program_1985)
+
+Repositorio: [asoto59g/Basic_program_1985](https://github.com/asoto59g/Basic_program_1985)
 
 Este proyecto documenta, con un caso real, cómo **recuperar el código fuente** de un programa IBM BASICA / GW-BASIC de finales de los 80 y **volver a usarlo** en una máquina actual. El ejemplar es `NIVEL2.BAS` (1990): compensación de **corte y relleno** en una nivelación topográfica por cuadrícula.
 
