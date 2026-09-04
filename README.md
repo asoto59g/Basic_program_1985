@@ -1,4 +1,6 @@
-<img width="484" height="279" alt="gwbasic" src="https://github.com/user-attachments/assets/fe8ea9a8-fe83-4ded-acfb-82abb0553cd3" />
+<p align="center">
+  <img alt="gwbasic" src="https://github.com/user-attachments/assets/fe8ea9a8-fe83-4ded-acfb-82abb0553cd3" width="80%" />
+</p>
 
 # Rescate de NIVEL2.BAS (BASICA, 1990) → Python
 
